@@ -122,7 +122,10 @@ private fun FruitPage(
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
 ) {
-    val viewModel = viewModel { FruitViewModel().apply { startGrowing(currentFruit) } }
+    val viewModel = viewModel { FruitViewModel() }
+    LaunchedEffect(viewModel) {
+        viewModel.startGrowing(currentFruit)
+    }
     val growCount by viewModel.grownFruitCount.collectAsStateWithLifecycle()
     FruitForm(
         currentFruit = currentFruit,

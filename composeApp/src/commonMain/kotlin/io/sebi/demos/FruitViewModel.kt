@@ -10,7 +10,11 @@ class FruitViewModel() : ViewModel() {
     private val _grownFruitCount = MutableStateFlow(0)
     val grownFruitCount: StateFlow<Int> = _grownFruitCount.asStateFlow()
     
+    private val isGrowing = MutableStateFlow(false)
+
     fun startGrowing(fruit: String) {
+        val shouldStartGrowing = isGrowing.compareAndSet(expect = false, update = true)
+        if(!shouldStartGrowing) return
         viewModelScope.launch {
             blockPrint("[now growing $fruit]")
             while (true) {
