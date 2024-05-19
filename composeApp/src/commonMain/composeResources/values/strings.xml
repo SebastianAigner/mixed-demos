@@ -26,4 +26,5 @@
     <string name="back_button">Back</string>
     <string name="cupcakes">%1$d cupcakes</string>
     <string name="cupcake_description">A %1$s Cupcake</string>
+    <string name="conference_description">The %1$s conference!</string>
 </resources>

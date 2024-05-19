@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Cupcake</string>
+    <string name="order_cupcakes">Order Cupcakes</string>
+    <string name="one_cupcake">One Cupcake</string>
+    <string name="six_cupcakes">Six Cupcakes</string>
+    <string name="twelve_cupcakes">Twelve Cupcakes</string>
+    <string name="choose_flavor">Choose Flavor</string>
+    <string name="vanilla">Vanilla</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="red_velvet">Red Velvet</string>
+    <string name="salted_caramel">Salted Caramel</string>
+    <string name="coffee">Kaffee</string>
+    <string name="special_flavor">Besondere Geschmacksrichtung</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="next">Weiter</string>
+    <string name="choose_pickup_date">Abholtermin wählen</string>
+    <string name="order_summary">Bestellübersicht</string>
+    <string name="send">Bestellung an eine andere App senden</string>
+    <string name="quantity">Menge</string>
+    <string name="flavor">Geschmacksrichtung</string>
+    <string name="pickup_date">Abholdatum</string>
+    <string name="subtotal_price">Zwischensumme %1$s</string>
+    <string name="total_price">Gesamtsumme %1$s</string>
+    <string name="new_cupcake_order">Neue Cupcake-Bestellung</string>
+    <string name="order_details">Menge: %1$s \nGeschmacksrichtung: %2$s \nAbholdatum: %3$s \nGesamt: %4$s \n\nVielen Dank!</string>
+    <string name="back_button">Zurück</string>
+    <string name="cupcakes">%1$d Cupcakes</string>
+    <string name="cupcake_description">Ein %1$s Cupcake</string>
+    <string name="conference_description">Die %1$s Konferenz!</string>
+</resources>
