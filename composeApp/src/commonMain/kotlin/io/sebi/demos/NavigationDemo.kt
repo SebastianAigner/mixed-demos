@@ -26,7 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.matkovivan.nav_cupcake.ui.theme.CupcakeTheme
+import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,7 +41,7 @@ val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓",
 @Preview
 @Composable
 fun StartPagePreview() {
-    CupcakeTheme {
+    MyAppTheme {
         StartPage { }
     }
 }
@@ -49,7 +49,7 @@ fun StartPagePreview() {
 @Preview
 @Composable
 fun FruitForm() {
-    CupcakeTheme {
+    MyAppTheme {
         FruitForm("🍎", 0, {}, {}, {})
     }
 }

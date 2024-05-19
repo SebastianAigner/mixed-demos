@@ -27,7 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.matkovivan.nav_cupcake.data.OrderUiState
 import com.matkovivan.nav_cupcake.ui.components.FormattedPriceLabel
-import com.matkovivan.nav_cupcake.ui.theme.CupcakeTheme
+import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import cupcake.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -112,7 +112,7 @@ fun OrderSummaryScreen(
 @Preview
 @Composable
 fun OrderSummaryPreview() {
-    CupcakeTheme {
+    MyAppTheme {
         OrderSummaryScreen(
             orderUiState = OrderUiState(0, "Test", "Test", "$300.00"),
             onSendButtonClicked = { subject: String, summary: String -> },

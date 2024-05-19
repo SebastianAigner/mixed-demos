@@ -20,7 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.matkovivan.nav_cupcake.CupcakeApp
-import com.matkovivan.nav_cupcake.ui.theme.CupcakeTheme
+import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import cupcake.composeapp.generated.resources.Res
 import cupcake.composeapp.generated.resources.cupcake
 import cupcake.composeapp.generated.resources.cupcake_description

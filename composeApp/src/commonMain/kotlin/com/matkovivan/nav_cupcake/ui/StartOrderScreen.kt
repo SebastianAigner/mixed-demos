@@ -25,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.matkovivan.nav_cupcake.data.DataSource
-import com.matkovivan.nav_cupcake.ui.theme.CupcakeTheme
+import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import cupcake.composeapp.generated.resources.Res
 import cupcake.composeapp.generated.resources.cupcake
 import cupcake.composeapp.generated.resources.order_cupcakes
@@ -104,7 +104,7 @@ fun SelectQuantityButton(
 @Preview
 @Composable
 fun StartOrderPreview() {
-    CupcakeTheme {
+    MyAppTheme {
         StartOrderScreen(
             quantityOptions = DataSource.quantityOptions,
             onNextButtonClicked = {},

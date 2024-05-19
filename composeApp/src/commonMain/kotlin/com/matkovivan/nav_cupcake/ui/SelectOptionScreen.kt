@@ -32,7 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.matkovivan.nav_cupcake.ui.components.FormattedPriceLabel
-import com.matkovivan.nav_cupcake.ui.theme.CupcakeTheme
+import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import cupcake.composeapp.generated.resources.Res
 import cupcake.composeapp.generated.resources.cancel
 import cupcake.composeapp.generated.resources.next
@@ -125,7 +125,7 @@ fun SelectOptionScreen(
 @Preview
 @Composable
 fun SelectOptionPreview() {
-    CupcakeTheme {
+    MyAppTheme {
         SelectOptionScreen(
             subtotal = "299.99",
             options = listOf("Option 1", "Option 2", "Option 3", "Option 4"),

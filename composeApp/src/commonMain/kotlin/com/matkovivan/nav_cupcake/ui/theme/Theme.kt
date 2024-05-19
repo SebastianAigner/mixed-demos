@@ -91,7 +91,7 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun CupcakeTheme(
+fun MyAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
