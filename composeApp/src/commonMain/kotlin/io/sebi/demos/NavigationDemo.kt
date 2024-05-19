@@ -47,7 +47,7 @@ fun StartPagePreview() {
 
 @Preview
 @Composable
-fun FruitForm() {
+fun FruitFormPreview() {
     MyAppTheme {
         FruitForm("🍎", 0, {}, {}, {})
     }
@@ -153,7 +153,7 @@ private fun StartPage(onClickFruit: (String) -> Unit) {
         modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(40.dp)
     ) {
-        Text("All fruits", fontSize = 40.sp, style = LocalTextStyle.current)
+        Text("All fruits", fontSize = 40.sp)
         for (fruit in fruitEmojis) {
             Text(fruit, fontSize = 60.sp, modifier = Modifier.clickable {
                 onClickFruit(fruit)
