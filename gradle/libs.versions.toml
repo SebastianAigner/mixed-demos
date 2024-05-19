@@ -3,13 +3,13 @@ agp = "8.2.0"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
-androidx-activity = "1.8.2"
+androidx-activity = "1.9.0"
 androidx-lifecycle = "2.8.0-rc01"
 androidx-navigation = "2.7.0-alpha04"
 compose-android = "1.6.7"
-compose-multiplatform = "1.6.10-rc01"
+compose-multiplatform = "1.6.10-rc03"
 junit = "4.13.2"
-kotlin = "2.0.0-RC2"
+kotlin = "2.0.0-RC3"
 kotlinx-datetime = "0.6.0-RC.2"
 
 [libraries]
@@ -19,6 +19,7 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-android" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-android" }

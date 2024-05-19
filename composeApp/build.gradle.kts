@@ -26,7 +26,7 @@ kotlin {
         }
         binaries.executable()
     }
-    
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -34,9 +34,9 @@ kotlin {
             }
         }
     }
-    
+
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -47,7 +47,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         all {
             languageSettings {
@@ -89,6 +89,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.compose)
         }
         desktopMain.dependencies {
