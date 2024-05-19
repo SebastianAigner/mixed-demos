@@ -12,9 +12,11 @@ class FruitViewModel() : ViewModel() {
     val grownFruitCount: StateFlow<Int> = _grownFruitCount.asStateFlow()
 
     private var growFruitJob: Job? = null
+    private var fruit = "No fruit"
 
     fun startGrowing(fruit: String) {
         if (growFruitJob != null) return
+        this.fruit = fruit
         growFruitJob = viewModelScope.launch {
             blockPrint("[now growing $fruit]")
             while (true) {
@@ -23,5 +25,10 @@ class FruitViewModel() : ViewModel() {
                 _grownFruitCount.update { it + 1 }
             }
         }
+    }
+
+    override fun onCleared() {
+        println("Cleared ViewModel growing $fruit")
+        super.onCleared()
     }
 }

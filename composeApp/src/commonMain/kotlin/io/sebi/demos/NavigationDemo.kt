@@ -1,6 +1,5 @@
 package io.sebi.demos
 
-import MyViewModel
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -154,7 +153,6 @@ private fun StartPage(onClickFruit: (String) -> Unit) {
         modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(40.dp)
     ) {
-        println(LocalTextStyle.current)
         Text("All fruits", fontSize = 40.sp, style = LocalTextStyle.current)
         for (fruit in fruitEmojis) {
             Text(fruit, fontSize = 60.sp, modifier = Modifier.clickable {
