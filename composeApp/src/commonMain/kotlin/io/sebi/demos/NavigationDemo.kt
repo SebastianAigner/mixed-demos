@@ -5,10 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -25,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.matkovivan.nav_cupcake.ui.theme.CupcakeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,18 +32,23 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
-val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒")
+val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒", "🥑")
 
 @Preview
 @Composable
 fun StartPagePreview() {
-    StartPage { }
+    CupcakeTheme {
+        StartPage { }
+    }
+
 }
 
 @Preview
 @Composable
 fun FruitForm() {
-    FruitForm("🍎", 0, {}, {}, {})
+    CupcakeTheme {
+        FruitForm("🍎", 0, {}, {}, {})
+    }
 }
 
 @Composable
@@ -56,7 +59,6 @@ fun NavigationDemoApp() {
         startDestination = "start",
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
             .windowInsetsPadding(WindowInsets.safeContent)
     ) {
         composable("start") {
@@ -139,10 +141,15 @@ private fun FruitPage(
 
 @Composable
 private fun StartPage(onClickFruit: (String) -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text("All fruits", fontSize = 20.sp)
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(40.dp)
+    ) {
+        println(LocalTextStyle.current)
+        Text("All fruits", fontSize = 40.sp, style = LocalTextStyle.current)
         for (fruit in fruitEmojis) {
-            Text(fruit, fontSize = 40.sp, modifier = Modifier.clickable {
+            Text(fruit, fontSize = 60.sp, modifier = Modifier.clickable {
                 onClickFruit(fruit)
             })
         }
