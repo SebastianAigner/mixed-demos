@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
@@ -25,32 +26,27 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-var printCtr = 0
-fun blockPrint(str: String) {
-    if (printCtr >= 32) {
-        println()
-        printCtr = 0
-    }
-    print("$str")
-    printCtr += str.length
-}
-
-class FruitViewModel() : ViewModel() {
-    fun startGrowing(fruit: String) {
-        viewModelScope.launch {
-            blockPrint("[now growing $fruit]")
-            while (true) {
-                delay(1000)
-                blockPrint("$fruit")
-            }
-        }
-    }
-}
 
 val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒")
+
+@Preview
+@Composable
+fun StartPagePreview() {
+    StartPage { }
+}
+
+@Preview
+@Composable
+fun FruitForm() {
+    FruitForm("🍎", 0, {}, {}, {})
+}
 
 @Composable
 fun NavigationDemoApp() {
@@ -65,10 +61,10 @@ fun NavigationDemoApp() {
     ) {
         composable("start") {
             StartPage(onClickFruit = { fruit ->
-                navController.navigate("lifecycle/$fruit")
+                navController.navigate("fruitForm/$fruit")
             })
         }
-        composable("lifecycle/{fruit}") { backStackEntry ->
+        composable("fruitForm/{fruit}") { backStackEntry ->
             val currentFruit = backStackEntry.arguments?.getString("fruit") ?: "No fruit"
             FruitPage(
                 currentFruit = currentFruit,
@@ -80,20 +76,14 @@ fun NavigationDemoApp() {
     }
 }
 
-@Preview
-@Composable
-fun FruitPagePreview() {
-    FruitPage("🍎", {}, {}, {}, null)
-}
-
-@Composable
 @OptIn(ExperimentalLayoutApi::class)
-private fun FruitPage(
+@Composable
+fun FruitForm(
     currentFruit: String,
+    growCount: Int,
     onNavigate: (String) -> Unit,
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
-    viewModel: ViewModel? = viewModel { FruitViewModel().apply { startGrowing(currentFruit) } }
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -103,10 +93,13 @@ private fun FruitPage(
             Text("Back")
         }
 
-        Text(
-            text = currentFruit,
-            fontSize = 80.sp
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = currentFruit,
+                fontSize = 80.sp
+            )
+            Text("$growCount grown on this page")
+        }
 
         var note by rememberSaveable { mutableStateOf("") }
         TextField(note, onValueChange = { note = it })
@@ -114,7 +107,7 @@ private fun FruitPage(
         FlowRow {
             for (fruit in fruitEmojis - currentFruit) {
                 Text(fruit, fontSize = 40.sp, modifier = Modifier.clickable {
-                    onNavigate("lifecycle/$fruit")
+                    onNavigate("fruitForm/$fruit")
                 })
             }
         }
@@ -123,8 +116,27 @@ private fun FruitPage(
 }
 
 @Composable
+private fun FruitPage(
+    currentFruit: String,
+    onNavigate: (String) -> Unit,
+    onBack: () -> Unit,
+    bottomSlot: @Composable ColumnScope.() -> Unit = {},
+) {
+    val viewModel = viewModel { FruitViewModel().apply { startGrowing(currentFruit) } }
+    val growCount by viewModel.grownFruitCount.collectAsStateWithLifecycle()
+    FruitForm(
+        currentFruit = currentFruit,
+        growCount = growCount,
+        onNavigate = onNavigate,
+        onBack = onBack,
+        bottomSlot = bottomSlot
+    )
+}
+
+
+@Composable
 private fun StartPage(onClickFruit: (String) -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
         Text("All fruits", fontSize = 20.sp)
         for (fruit in fruitEmojis) {
             Text(fruit, fontSize = 40.sp, modifier = Modifier.clickable {
