@@ -6,7 +6,7 @@ import io.sebi.demos.Repository
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MyViewModel : ViewModel() {
+class MoodViewModel : ViewModel() {
     private val _changeCount = MutableStateFlow(0)
     val changeCount: StateFlow<Int> = _changeCount
 
