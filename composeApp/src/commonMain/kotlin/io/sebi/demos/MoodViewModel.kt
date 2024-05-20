@@ -6,7 +6,7 @@ import io.sebi.demos.Repository
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class KodeeViewModel : ViewModel() {
+class MyViewModel : ViewModel() {
     private val _changeCount = MutableStateFlow(0)
     val changeCount: StateFlow<Int> = _changeCount
 
@@ -15,5 +15,10 @@ class KodeeViewModel : ViewModel() {
             Repository.save(kodeeMood)
             _changeCount.update { it + 1 }
         }
+    }
+
+    override fun onCleared() {
+        println("Cleaning up and releasing resources!")
+        super.onCleared()
     }
 }
