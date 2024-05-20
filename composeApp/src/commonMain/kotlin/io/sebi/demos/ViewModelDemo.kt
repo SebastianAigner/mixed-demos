@@ -19,7 +19,7 @@ fun ViewModelDemoApp() {
         Column(
             Modifier
                 .fillMaxSize()
-                .windowInsetsBottomHeight(WindowInsets.safeDrawing),
+                .windowInsetsPadding(WindowInsets.safeDrawing),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text("Current mood?")
