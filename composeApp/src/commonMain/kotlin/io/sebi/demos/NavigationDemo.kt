@@ -55,33 +55,9 @@ fun FruitFormPreview() {
 
 @Composable
 fun NavigationDemoApp() {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = "start",
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeContent),
-        enterTransition = enterT,
-        exitTransition = exitT,
-        popExitTransition = popExitT,
-        popEnterTransition = popEnterT
-    ) {
-        composable("start") {
-            StartPage(onClickFruit = { fruit ->
-                navController.navigate("fruitForm/$fruit")
-            })
-        }
-        composable("fruitForm/{fruit}") { backStackEntry ->
-            val currentFruit = backStackEntry.arguments?.getString("fruit") ?: "No fruit"
-            FruitPage(
-                currentFruit = currentFruit,
-                onNavigate = { navController.navigate(it) },
-                onBack = { navController.popBackStack() },
-                bottomSlot = { Breadcrumbs(navController) }
-            )
-        }
-    }
+    StartPage(onClickFruit = { fruit ->
+        println("Clicked $fruit")
+    })
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -110,7 +86,7 @@ fun FruitForm(
             Text("$growCount grown on this page")
         }
 
-        var note by rememberSaveable { mutableStateOf("") }
+        var note by remember { mutableStateOf("") }
         TextField(note, onValueChange = { note = it })
         Text("Related fruits")
         FlowRow {
@@ -131,14 +107,9 @@ private fun FruitPage(
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
 ) {
-    val viewModel = viewModel { FruitViewModel() }
-    LaunchedEffect(viewModel) {
-        viewModel.startGrowing(currentFruit)
-    }
-    val growCount by viewModel.grownFruitCount.collectAsStateWithLifecycle()
     FruitForm(
         currentFruit = currentFruit,
-        growCount = growCount,
+        growCount = 0,
         onNavigate = onNavigate,
         onBack = onBack,
         bottomSlot = bottomSlot

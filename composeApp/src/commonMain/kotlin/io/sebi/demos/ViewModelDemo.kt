@@ -11,9 +11,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun ViewModelDemoApp() {
-    val vm = viewModel { MoodViewModel() }
-    val changeMood = vm::storeChange
-    val storedMoodChanges by vm.changeCount.collectAsStateWithLifecycle()
+
+    val changeMood: (String) -> Unit = {}
+    val storedMoodChanges = 0
+
     MaterialTheme {
         Column(
             Modifier
