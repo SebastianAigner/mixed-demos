@@ -11,8 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import cupcake.composeapp.generated.resources.Res
-import cupcake.composeapp.generated.resources.conference_description
-import cupcake.composeapp.generated.resources.menu_banner
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
