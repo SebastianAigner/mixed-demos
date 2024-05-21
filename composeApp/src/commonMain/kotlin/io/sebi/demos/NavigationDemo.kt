@@ -47,7 +47,7 @@ fun StartPagePreview() {
 
 @Preview
 @Composable
-fun FruitFormPreview() {
+fun FruitPagePreview() {
     MyAppTheme {
         FruitForm("🍎", 0, {}, {}, {})
     }
@@ -65,7 +65,7 @@ fun NavigationDemoApp() {
 fun FruitForm(
     currentFruit: String,
     growCount: Int,
-    onNavigate: (String) -> Unit,
+    onSelectFruit: (String) -> Unit,
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
 ) {
@@ -92,7 +92,7 @@ fun FruitForm(
         FlowRow {
             for (fruit in fruitEmojis - currentFruit) {
                 Text(fruit, fontSize = 40.sp, modifier = Modifier.clickable {
-                    onNavigate("fruitForm/$fruit")
+                    onSelectFruit(fruit)
                 })
             }
         }
@@ -103,14 +103,19 @@ fun FruitForm(
 @Composable
 private fun FruitPage(
     currentFruit: String,
-    onNavigate: (String) -> Unit,
+    onSelectFruit: (String) -> Unit,
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
 ) {
+    val fruitPageViewModel = viewModel { FruitViewModel() }
+    val fruitCount by fruitPageViewModel.grownFruitCount.collectAsStateWithLifecycle()
+    LaunchedEffect(fruitPageViewModel) {
+        fruitPageViewModel.startGrowing(currentFruit)
+    }
     FruitForm(
         currentFruit = currentFruit,
-        growCount = 0,
-        onNavigate = onNavigate,
+        growCount = fruitCount,
+        onSelectFruit = onSelectFruit,
         onBack = onBack,
         bottomSlot = bottomSlot
     )
