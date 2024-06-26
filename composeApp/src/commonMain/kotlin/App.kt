@@ -7,7 +7,7 @@ import io.sebi.demos.*
 @Composable
 fun App() {
     MyAppTheme {
-        ResourcesDemoApp()
+        NavigationDemoApp()
     }
 }
 

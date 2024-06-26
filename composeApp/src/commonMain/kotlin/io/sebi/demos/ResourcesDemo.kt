@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.sp
 import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import cupcake.composeapp.generated.resources.Res
 import cupcake.composeapp.generated.resources.conference_description
+import cupcake.composeapp.generated.resources.droidcon
 import cupcake.composeapp.generated.resources.menu_banner
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -26,14 +27,14 @@ fun ResourcesDemoApp() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(Res.drawable.menu_banner),
+                painterResource(Res.drawable.droidcon),
                 "KotlinConf Banner"
             )
             Spacer(Modifier.height(16.dp))
             Text(
                 text = stringResource(
                     Res.string.conference_description,
-                    "Multiplatform"
+                    "Android"
                 ),
                 fontSize = 30.sp,
                 lineHeight = 36.sp,
