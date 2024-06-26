@@ -35,7 +35,8 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
-val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒", "🥑")
+//val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒", "🥑")
+val fruitEmojis = listOf("Apple", "Orange", "Lemon", "Banana", "Melon", "Grape", "Strawberry", "Cherry", "Avocado")
 
 @Preview
 @Composable
@@ -113,7 +114,7 @@ fun FruitForm(
         var note by rememberSaveable { mutableStateOf("") }
         TextField(note, onValueChange = { note = it })
         Text("Related fruits")
-        FlowRow {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             for (fruit in fruitEmojis - currentFruit) {
                 Text(fruit, fontSize = 40.sp, modifier = Modifier.clickable {
                     onNavigate("fruitForm/$fruit")
@@ -165,6 +166,6 @@ private fun StartPage(onClickFruit: (String) -> Unit) {
 @Composable
 fun Breadcrumbs(navController: NavHostController) {
     val state by navController.currentBackStack.collectAsState()
-    val crumbs = state.mapNotNull { it.arguments?.getString("fruit") }.joinToString(" → ")
+    val crumbs = state.mapNotNull { it.arguments?.getString("fruit") }.joinToString(" - ")
     Text(crumbs)
 }
