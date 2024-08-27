@@ -25,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,11 +33,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
-//val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒", "🥑")
-val fruitEmojis = listOf("Apple", "Orange", "Lemon", "Banana", "Melon", "Grape", "Strawberry", "Cherry", "Avocado")
+val fruitEmojis = listOf("🍎", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍒", "🥑")
+//val fruitEmojis = listOf("Apple", "Orange", "Lemon", "Banana", "Melon", "Grape", "Strawberry", "Cherry", "Avocado")
 
 @Preview
 @Composable
@@ -54,12 +56,18 @@ fun FruitFormPreview() {
     }
 }
 
+@Serializable
+data object Start
+
+@Serializable
+data class FruitForm(val fruit: String)
+
 @Composable
 fun NavigationDemoApp() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "start",
+        startDestination = Start,
         modifier = Modifier
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.safeContent),
@@ -68,13 +76,14 @@ fun NavigationDemoApp() {
         popExitTransition = popExitT,
         popEnterTransition = popEnterT
     ) {
-        composable("start") {
+
+        composable<Start> {
             StartPage(onClickFruit = { fruit ->
-                navController.navigate("fruitForm/$fruit")
+                navController.navigate(FruitForm(fruit))
             })
         }
-        composable("fruitForm/{fruit}") { backStackEntry ->
-            val currentFruit = backStackEntry.arguments?.getString("fruit") ?: "No fruit"
+        composable<FruitForm> { backStackEntry ->
+            val currentFruit = backStackEntry.toRoute<FruitForm>().fruit
             FruitPage(
                 currentFruit = currentFruit,
                 onNavigate = { navController.navigate(it) },
@@ -90,7 +99,7 @@ fun NavigationDemoApp() {
 fun FruitForm(
     currentFruit: String,
     growCount: Int,
-    onNavigate: (String) -> Unit,
+    onNavigate: (FruitForm) -> Unit,
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
 ) {
@@ -117,7 +126,7 @@ fun FruitForm(
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             for (fruit in fruitEmojis - currentFruit) {
                 Text(fruit, fontSize = 40.sp, modifier = Modifier.clickable {
-                    onNavigate("fruitForm/$fruit")
+                    onNavigate(FruitForm(fruit))
                 })
             }
         }
@@ -128,7 +137,7 @@ fun FruitForm(
 @Composable
 private fun FruitPage(
     currentFruit: String,
-    onNavigate: (String) -> Unit,
+    onNavigate: (FruitForm) -> Unit,
     onBack: () -> Unit,
     bottomSlot: @Composable ColumnScope.() -> Unit = {},
 ) {

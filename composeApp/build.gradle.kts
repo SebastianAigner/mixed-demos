@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -35,7 +36,9 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm("desktop") {
+
+    }
 
     listOf(
         iosX64(),
@@ -82,7 +85,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.datetime)
-
+            implementation(libs.kotlinx.serialization.json)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.components.resources)
