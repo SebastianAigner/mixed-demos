@@ -28,7 +28,6 @@ fun LifecycleApp() {
     LifecycleLogger()
     val counter by counterFlow.collectAsStateWithLifecycle(
         initialValue = 0, // Show the overloads here
-        minActiveState = Lifecycle.State.CREATED // CREATED even survives phone lock and background!
     )
     Box(Modifier.fillMaxSize(), contentAlignment = Center) {
         Column(horizontalAlignment = CenterHorizontally) {
