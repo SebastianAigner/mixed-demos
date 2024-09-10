@@ -8,10 +8,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.matkovivan.nav_cupcake.ui.theme.MyAppTheme
+import cupcake.composeapp.generated.resources.*
 import cupcake.composeapp.generated.resources.Res
 import cupcake.composeapp.generated.resources.conference_description
-import cupcake.composeapp.generated.resources.droidcon
-import cupcake.composeapp.generated.resources.menu_banner
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -27,7 +26,7 @@ fun ResourcesDemoApp() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(Res.drawable.droidcon),
+                painterResource(Res.drawable.droidkaigi),
                 "KotlinConf Banner"
             )
             Spacer(Modifier.height(16.dp))
